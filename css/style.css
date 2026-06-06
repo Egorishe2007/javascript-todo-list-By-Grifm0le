@@ -1,0 +1,60 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    color: #222;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 25px;
+}
+
+.header h1 {
+    font-size: 2rem;
+}
+
+button {
+    cursor: pointer;
+}
+
+.add-task,
+.controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+input,
+select,
+button {
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+#taskList {
+    list-style: none;
+}
+
+.statistics {
+    display: flex;
+    gap: 25px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}

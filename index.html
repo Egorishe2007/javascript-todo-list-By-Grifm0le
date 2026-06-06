@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFlow</title>
+
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+    <div class="container">
+
+        <header class="header">
+            <h1>TaskFlow</h1>
+
+            <button id="themeBtn">
+                🌙
+            </button>
+        </header>
+
+        <section class="add-task">
+
+            <input
+                type="text"
+                id="taskInput"
+                placeholder="Введите задачу..."
+            >
+
+            <input
+                type="date"
+                id="deadlineInput"
+            >
+
+            <select id="priorityInput">
+                <option value="low">Низкий</option>
+                <option value="medium">Средний</option>
+                <option value="high">Высокий</option>
+            </select>
+
+            <button id="addBtn">
+                Добавить
+            </button>
+
+        </section>
+
+        <section class="controls">
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Поиск..."
+            >
+
+            <select id="filterSelect">
+                <option value="all">Все</option>
+                <option value="active">Активные</option>
+                <option value="completed">Выполненные</option>
+            </select>
+
+        </section>
+
+        <section class="statistics">
+
+            <div>
+                Всего: <span id="totalTasks">0</span>
+            </div>
+
+            <div>
+                Выполнено: <span id="completedTasks">0</span>
+            </div>
+
+        </section>
+
+        <ul id="taskList"></ul>
+
+    </div>
+
+    <script src="./js/storage.js"></script>
+    <script src="./js/tasks.js"></script>
+    <script src="./js/filters.js"></script>
+    <script src="./js/theme.js"></script>
+    <script src="./js/statistics.js"></script>
+    <script src="./js/app.js"></script>
+
+</body>
+</html>
