@@ -5,6 +5,7 @@ const deadlineInput = document.getElementById("deadlineInput");
 const priorityInput = document.getElementById("priorityInput");
 const addBtn = document.getElementById("addBtn");
 const taskList = document.getElementById("taskList");
+const searchInput = document.getElementById("searchInput");
 
 addBtn.addEventListener("click", addTask);
 
@@ -37,8 +38,17 @@ function addTask() {
 function renderTasks() {
     taskList.innerHTML = "";
 
-    tasks.forEach(task => {
-        const li = document.createElement("li");
+    const searchText =
+        searchInput.value.toLowerCase();
+
+    tasks
+        .filter(task =>
+            task.title
+                .toLowerCase()
+                .includes(searchText)
+        )
+        .forEach(task => {
+    const li = document.createElement("li");
 
         li.className = "task-item";
 
@@ -107,3 +117,8 @@ function saveTasks() {
 }
 
 renderTasks();
+
+searchInput.addEventListener(
+    "input",
+    renderTasks
+);
