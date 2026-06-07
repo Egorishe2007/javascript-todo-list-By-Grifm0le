@@ -63,7 +63,7 @@ function renderTasks() {
     .forEach(task => {
     const li = document.createElement("li");
 
-        li.className = "task-item";
+        li.className = `task-item priority-${task.priority}`;
 
         li.innerHTML = `
             <div>
@@ -75,6 +75,10 @@ function renderTasks() {
             <div>
                 <button onclick="toggleTask(${task.id})">
                     ${task.completed ? "↩️" : "✅"}
+                </button>
+
+                <button onclick="editTask(${task.id})">
+                    ✏️
                 </button>
 
                 <button onclick="deleteTask(${task.id})">
@@ -109,6 +113,34 @@ function toggleTask(id) {
 
     renderTasks();
     saveTasks();
+}
+
+function editTask(id) {
+
+    const task =
+        tasks.find(task => task.id === id);
+
+    if (!task) {
+        return;
+    }
+
+    const newTitle = prompt(
+        "Введите новое название задачи:",
+        task.title
+    );
+
+    if (
+        newTitle === null ||
+        newTitle.trim() === ""
+    ) {
+        return;
+    }
+
+    task.title = newTitle.trim();
+
+    saveTasks();
+
+    renderTasks();
 }
 
 function updateStatistics() {
