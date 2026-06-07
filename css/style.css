@@ -58,3 +58,28 @@ button {
     margin-bottom: 20px;
     font-weight: bold;
 }
+
+.task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: white;
+
+    padding: 15px;
+
+    margin-bottom: 10px;
+
+    border-radius: 12px;
+
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.task-item button {
+    margin-left: 5px;
+}
+
+.completed {
+    opacity: 0.6;
+    text-decoration: line-through;
+}
