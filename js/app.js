@@ -6,6 +6,8 @@ const priorityInput = document.getElementById("priorityInput");
 const addBtn = document.getElementById("addBtn");
 const taskList = document.getElementById("taskList");
 const searchInput = document.getElementById("searchInput");
+const filterSelect = document.getElementById("filterSelect");
+const themeBtn = document.getElementById("themeBtn");
 
 addBtn.addEventListener("click", addTask);
 
@@ -42,12 +44,23 @@ function renderTasks() {
         searchInput.value.toLowerCase();
 
     tasks
-        .filter(task =>
-            task.title
-                .toLowerCase()
-                .includes(searchText)
-        )
-        .forEach(task => {
+    .filter(task => {
+        return task.title
+            .toLowerCase()
+            .includes(searchText);
+    })
+    .filter(task => {
+        if (filterSelect.value === "active") {
+            return !task.completed;
+        }
+
+        if (filterSelect.value === "completed") {
+            return task.completed;
+        }
+
+        return true;
+    })
+    .forEach(task => {
     const li = document.createElement("li");
 
         li.className = "task-item";
@@ -121,4 +134,36 @@ renderTasks();
 searchInput.addEventListener(
     "input",
     renderTasks
+);
+
+filterSelect.addEventListener(
+    "change",
+    renderTasks
+);
+
+const savedTheme =
+    localStorage.getItem("theme");
+
+if (savedTheme === "dark") {
+    document.body.classList.add("dark");
+}
+
+themeBtn.addEventListener(
+    "click",
+    () => {
+
+        document.body.classList.toggle(
+            "dark"
+        );
+
+        const isDark =
+            document.body.classList.contains(
+                "dark"
+            );
+
+        localStorage.setItem(
+            "theme",
+            isDark ? "dark" : "light"
+        );
+    }
 );

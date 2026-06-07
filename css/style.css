@@ -83,3 +83,20 @@ button {
     opacity: 0.6;
     text-decoration: line-through;
 }
+
+.dark {
+    background: #1a1a1a;
+    color: white;
+}
+
+.dark .task-item {
+    background: #2c2c2c;
+}
+
+.dark input,
+.dark select,
+.dark button {
+    background: #333;
+    color: white;
+    border: 1px solid #555;
+}
