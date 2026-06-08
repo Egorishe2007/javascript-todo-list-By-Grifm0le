@@ -8,6 +8,8 @@ const taskList = document.getElementById("taskList");
 const searchInput = document.getElementById("searchInput");
 const filterSelect = document.getElementById("filterSelect");
 const themeBtn = document.getElementById("themeBtn");
+const categoryInput = document.getElementById("categoryInput");
+const categoryFilter = document.getElementById("categoryFilter");
 
 addBtn.addEventListener("click", addTask);
 
@@ -24,6 +26,7 @@ function addTask() {
         title,
         deadline: deadlineInput.value,
         priority: priorityInput.value,
+        category: categoryInput.value,
         completed: false
     };
 
@@ -60,6 +63,14 @@ function renderTasks() {
 
         return true;
     })
+    .filter(task => {
+
+        if (categoryFilter.value === "all") {
+            return true;
+        }
+
+        return (task.category === categoryFilter.value);
+    })
     .forEach(task => {
     const li = document.createElement("li");
 
@@ -69,6 +80,7 @@ function renderTasks() {
             <div>
                 <h3>${task.title}</h3>
                 <p>Приоритет: ${task.priority}</p>
+                <p>Категория: ${task.category}</p>
                 <p>Дедлайн: ${task.deadline || "Не указан"}</p>
             </div>
 
@@ -93,6 +105,11 @@ function renderTasks() {
 
         taskList.appendChild(li);
     });
+
+    categoryFilter.addEventListener(
+    "change",
+    renderTasks
+    );
 
     updateStatistics();
 }
