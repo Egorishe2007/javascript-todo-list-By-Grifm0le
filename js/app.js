@@ -1,4 +1,5 @@
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+let editingTaskId = null;
 
 const taskInput = document.getElementById("taskInput");
 const deadlineInput = document.getElementById("deadlineInput");
@@ -10,6 +11,10 @@ const filterSelect = document.getElementById("filterSelect");
 const themeBtn = document.getElementById("themeBtn");
 const categoryInput = document.getElementById("categoryInput");
 const categoryFilter = document.getElementById("categoryFilter");
+const editModal = document.getElementById("editModal");
+const editTaskInput = document.getElementById("editTaskInput");
+const saveEditBtn = document.getElementById("saveEditBtn");
+const cancelEditBtn = document.getElementById("cancelEditBtn");
 
 addBtn.addEventListener("click", addTask);
 
@@ -131,7 +136,6 @@ function toggleTask(id) {
     renderTasks();
     saveTasks();
 }
-
 function editTask(id) {
 
     const task =
@@ -141,23 +145,11 @@ function editTask(id) {
         return;
     }
 
-    const newTitle = prompt(
-        "Введите новое название задачи:",
-        task.title
-    );
+    editingTaskId = id;
 
-    if (
-        newTitle === null ||
-        newTitle.trim() === ""
-    ) {
-        return;
-    }
+    editTaskInput.value = task.title;
 
-    task.title = newTitle.trim();
-
-    saveTasks();
-
-    renderTasks();
+    editModal.classList.add("show");
 }
 
 function updateStatistics() {
@@ -214,5 +206,57 @@ themeBtn.addEventListener(
             "theme",
             isDark ? "dark" : "light"
         );
+    }
+);
+saveEditBtn.addEventListener(
+    "click",
+    () => {
+
+        const task =
+            tasks.find(
+                task =>
+                    task.id === editingTaskId
+            );
+
+        if (!task) {
+            return;
+        }
+
+        const newTitle =
+            editTaskInput.value.trim();
+
+        if (!newTitle) {
+            return;
+        }
+
+        task.title = newTitle;
+
+        saveTasks();
+
+        renderTasks();
+
+        editModal.classList.remove("show");
+    }
+);
+cancelEditBtn.addEventListener(
+    "click",
+    () => {
+
+        editModal.classList.remove(
+            "show"
+        );
+    }
+);
+editModal.addEventListener(
+    "click",
+    event => {
+
+        if (
+            event.target === editModal
+        ) {
+            editModal.classList.remove(
+                "show"
+            );
+        }
     }
 );
